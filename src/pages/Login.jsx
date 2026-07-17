@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true); // Disable button to prevent multiple requests
 
-    const BASE_URL = "https://optimixclub-backend.onrender.com"; // Update if backend is deployed
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL; // Update if backend is deployed
     const endpoint = isSignup ? `${BASE_URL}/api/auth/signup` : `${BASE_URL}/api/auth/login`;
 
     //Use formdata if signing up with an image

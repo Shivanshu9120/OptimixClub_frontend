@@ -12,7 +12,7 @@ const EventsDisplay = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/events");
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events`);
   
         if (!response.ok) {
           throw new Error("Failed to fetch events");
@@ -23,7 +23,7 @@ const EventsDisplay = () => {
         // Map the events and append the full image URL
         const updatedEvents = data.map(event => ({
           ...event,
-          picture: `https://optimixclub-backend.onrender.com/api/events/uploads/${event.picture}`
+          picture: `${import.meta.env.VITE_API_BASE_URL}/api/events/uploads/${event.picture}`
         }));
   
         setEvents(updatedEvents);

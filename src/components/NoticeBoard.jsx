@@ -7,7 +7,7 @@ const NoticeBoard = () => {
   const noticeRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://optimixclub-backend.onrender.com/api/notices')
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/notices`)
       .then(response => setNotices(response.data))
       .catch(error => console.error('Error fetching notices:', error));
   }, []);

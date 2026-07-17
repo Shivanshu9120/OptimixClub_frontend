@@ -9,7 +9,7 @@ const SubmitTestimonial = () => {
         e.preventDefault();
         const token = localStorage.getItem("token");
 
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/testimonials/submit", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials/submit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

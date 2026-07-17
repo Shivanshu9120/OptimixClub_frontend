@@ -20,7 +20,7 @@ export default function ContactUs() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/contact/submit", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

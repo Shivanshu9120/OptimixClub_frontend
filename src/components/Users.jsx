@@ -15,7 +15,7 @@ const UsersPage = () => {
   // Fetch Logged-in User
   const fetchCurrentUser = async () => {
     try {
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/auth/user", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -32,7 +32,7 @@ const UsersPage = () => {
   // Fetch All Users
   const fetchUsers = async () => {
     try {
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/auth/users", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/users`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -52,7 +52,7 @@ const UsersPage = () => {
   // Promote User to Admin
   const promoteToAdmin = async (userId) => {
     try {
-      const response = await fetch(`https://optimixclub-backend.onrender.com/api/auth/user/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user/${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const UsersPage = () => {
   // Update User API Call
   const updateUser = async (userId, userData) => {
     try {
-      const response = await fetch(`https://optimixclub-backend.onrender.com/api/auth/user/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user/${userId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const UsersPage = () => {
           {users.map((user) => (
             <div key={user._id} className="bg-white rounded-lg shadow-lg p-4 text-center">
               <img
-                src={`https://optimixclub-backend.onrender.com/uploads/${user.photo}`}
+                src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${user.photo}`}
                 alt="Profile"
                 className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border border-gray-300"
               />

@@ -6,7 +6,7 @@ const Messages = () => {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("https://optimixclub-backend.onrender.com/api/contact/messages")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact/messages`)
       .then((response) => response.json())
       .then((data) => setMessage(data))
       .catch((error) => console.error("Error fetching messages:", error));
@@ -65,7 +65,7 @@ const Messages = () => {
               {/* Name & Profile Picture */}
               <div className="mt-4 flex flex-col items-center">
                 <img
-                  src={`https://optimixclub-backend.onrender.com/uploads/${m.user.photo}`}
+                  src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${m.user.photo}`}
                   alt={m.user.name}
                   className="w-16 h-16 rounded-full border-2 border-violet-500 shadow-lg shadow-violet-400/50"
                 />

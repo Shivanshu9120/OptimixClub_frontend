@@ -47,7 +47,7 @@ const Navbar = () => {
                 Logout
               </button>
               <img 
-                src={`https://optimixclub-backend.onrender.com/uploads/${photo}`} 
+                src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${photo}`} 
                 alt="Profile" 
                 className="h-10 w-10 rounded-full border-2 border-white cursor-pointer"
               />

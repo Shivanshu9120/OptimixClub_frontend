@@ -20,7 +20,7 @@ export default function AboutClub() {
       }
 
       try {
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/auth/users", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/users`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -163,7 +163,7 @@ export default function AboutClub() {
                 className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-all hover:scale-105 hover:shadow-2xl"
               >
                 <img
-                  src={`https://optimixclub-backend.onrender.com/uploads/${admin.photo}`}
+                  src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${admin.photo}`}
                   alt={admin.name}
                   className="w-24 h-24 rounded-full object-cover border-4 border-violet-500 hover:border-blue-500 transition-all"
                 />

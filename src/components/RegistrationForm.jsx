@@ -13,7 +13,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await fetch(`https://optimixclub-backend.onrender.com/api/events/${eventId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${eventId}`);
         if (!res.ok) throw new Error("Failed to fetch event");
         const data = await res.json();
         setEvent(data);
@@ -27,7 +27,7 @@ const RegistrationForm = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No token found");
 
-        const res = await fetch("https://optimixclub-backend.onrender.com/api/auth/user", {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -59,7 +59,7 @@ const RegistrationForm = () => {
     };
 
     try {
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/registration/", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/registration/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

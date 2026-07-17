@@ -11,7 +11,7 @@ const AdminTestimonials = () => {
     const fetchPendingTestimonials = async () => {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/testimonials/pending", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials/pending`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -24,7 +24,7 @@ const AdminTestimonials = () => {
     const approveTestimonial = async (id) => {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`https://optimixclub-backend.onrender.com/api/testimonials/approve/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials/approve/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const AdminTestimonials = () => {
     const deleteTestimonial = async (id) => {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`https://optimixclub-backend.onrender.com/api/testimonials/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials/delete/${id}`, {
           method: "DELETE",
           headers: {
               "Content-Type": "application/json",

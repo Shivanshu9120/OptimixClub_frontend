@@ -28,8 +28,8 @@ const AdminEventandNotice = () => {
   };
 
   useEffect(() => {
-    fetchData("https://optimixclub-backend.onrender.com/api/events", setEvents, "Failed to load events");
-    fetchData("https://optimixclub-backend.onrender.com/api/notices", setNotices, "Failed to load notices");
+    fetchData(`${import.meta.env.VITE_API_BASE_URL}/api/events`, setEvents, "Failed to load events");
+    fetchData(`${import.meta.env.VITE_API_BASE_URL}/api/notices`, setNotices, "Failed to load notices");
   }, []);
 
   const handleDelete = async (id, url, setter, itemType) => {
@@ -84,7 +84,7 @@ const AdminEventandNotice = () => {
                       <button className="text-blue-500 hover:text-blue-700 text-sm font-semibold">✏️ Edit</button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(event._id, "https://optimixclub-backend.onrender.com/api/events", setEvents, "event")}
+                      onClick={() => handleDelete(event._id, `${import.meta.env.VITE_API_BASE_URL}/api/events`, setEvents, "event")}
                       className="text-red-500 hover:text-red-700 text-sm font-semibold"
                     >
                       🗑 Delete
@@ -119,7 +119,7 @@ const AdminEventandNotice = () => {
                       <button className="text-blue-500 hover:text-blue-700 text-sm font-semibold">✏️ Edit</button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(notice._id, "https://optimixclub-backend.onrender.com/api/notices", setNotices, "notice")}
+                      onClick={() => handleDelete(notice._id, `${import.meta.env.VITE_API_BASE_URL}/api/notices`, setNotices, "notice")}
                       className="text-red-500 hover:text-red-700 text-sm font-semibold"
                     >
                       🗑 Delete

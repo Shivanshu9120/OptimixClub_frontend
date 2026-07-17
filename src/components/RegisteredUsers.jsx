@@ -7,13 +7,13 @@ const EventRegistrations = () => {
 
   useEffect(() => {
     // Fetch events
-    fetch("https://optimixclub-backend.onrender.com/api/events", { credentials: "include" })
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events`, { credentials: "include" })
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Error fetching events:", err));
 
     // Fetch registrations
-    fetch("https://optimixclub-backend.onrender.com/api/registration/registrations", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/registration/registrations`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -52,7 +52,7 @@ const EventRegistrations = () => {
             >
               {/* Event Image */}
               <img
-                src={`https://optimixclub-backend.onrender.com/uploads/${event.picture}`}
+                src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${event.picture}`}
                 alt={event.name}
                 className="w-full h-40 object-cover"
               />
@@ -84,7 +84,7 @@ const EventRegistrations = () => {
                           .map((reg) => (
                             <li key={reg._id} className="flex items-center p-2 rounded-lg bg-white shadow">
                               <img
-                                src={`https://optimixclub-backend.onrender.com/uploads/${reg.user.photo}`}
+                                src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${reg.user.photo}`}
                                 alt={reg.user.name}
                                 className="w-10 h-10 rounded-full mr-3"
                               />

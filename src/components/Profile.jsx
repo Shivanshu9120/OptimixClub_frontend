@@ -18,7 +18,7 @@ export const Profile = () => {
       }
 
       try {
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/auth/user", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const Profile = () => {
         ) : userInfo ? (
           <div>
             <img
-              src={`https://optimixclub-backend.onrender.com/uploads/${userInfo.photo}`}
+              src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${userInfo.photo}`}
               alt="Profile"
               className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border border-gray-300"
             />

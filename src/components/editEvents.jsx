@@ -22,7 +22,7 @@ const EditEvent = () => {
     // Fetch event data
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`https://optimixclub-backend.onrender.com/api/events/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/events/${id}`);
         const event = response.data;
 
         // ✅ Prefill the form with the event data
@@ -78,7 +78,7 @@ const EditEvent = () => {
       }
   
       await axios.put(
-        `https://optimixclub-backend.onrender.com/api/events/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/events/${id}`,
         formData,
         {
           headers: {
@@ -146,7 +146,7 @@ const EditEvent = () => {
             </label>
             {/* Existing Image Preview */}
               {eventData.picture && typeof eventData.picture === "string" && (
-                <img src={`https://optimixclub-backend.onrender.com/api/events/uploads/${eventData.picture}`} alt="Current Event" width="150" />
+                <img src={`${import.meta.env.VITE_API_BASE_URL}/api/events/uploads/${eventData.picture}`} alt="Current Event" width="150" />
               )}
 
               {/* File Upload */}

@@ -9,7 +9,7 @@ const Testimonials = () => {
 
   useEffect(() => {
     // Fetch testimonials
-    fetch("https://optimixclub-backend.onrender.com/api/testimonials")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials`)
       .then((response) => response.json())
       .then((data) => setTestimonials(data))
       .catch((error) => console.error("Error fetching testimonials:", error));
@@ -17,7 +17,7 @@ const Testimonials = () => {
     const token = localStorage.getItem("token");
 
     // Fetch logged-in user's role (assuming an API endpoint exists)
-    fetch("https://optimixclub-backend.onrender.com/api/auth/user", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
       method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Testimonials = () => {
           if(result.isConfirmed){
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`https://optimixclub-backend.onrender.com/api/testimonials/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/testimonials/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,7 @@ const Testimonials = () => {
               {/* Name & Profile Picture */}
               <div className="mt-4 flex flex-col items-center">
                 <img
-                  src={`https://optimixclub-backend.onrender.com/uploads/${t.user.photo}`}
+                  src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${t.user.photo}`}
                   alt={t.user.name}
                   className="w-16 h-16 rounded-full border-2 border-violet-500 shadow-lg shadow-violet-400/50"
                 />

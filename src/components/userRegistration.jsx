@@ -5,7 +5,7 @@ const UserRegistrations = () => {
   const [userRegistrations, setUserRegistrations] = useState([]);
 
   useEffect(() => {
-    fetch("https://optimixclub-backend.onrender.com/api/auth/user", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -23,7 +23,7 @@ const UserRegistrations = () => {
   useEffect(() => {
     if (!user) return;
 
-    fetch("https://optimixclub-backend.onrender.com/api/registration/registrations", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/registration/registrations`, {
       method: "GET",
       credentials: "include",
       headers: {

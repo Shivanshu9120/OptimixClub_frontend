@@ -14,7 +14,7 @@ const NoticeForm = () => {
       e.preventDefault();
     
       try {  
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/notices", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/notices`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

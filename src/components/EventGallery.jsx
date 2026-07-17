@@ -7,7 +7,7 @@ const EventGallery = () => {
   const galleryRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://optimixclub-backend.onrender.com/api/picture/')
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/picture/`)
       .then(response => setImages(response.data))
       .catch(error => console.error('Error fetching gallery images:', error));
   }, []);
@@ -21,7 +21,7 @@ const EventGallery = () => {
       <div ref={galleryRef} className="overflow-x-auto flex gap-6 pb-4 max-w-7xl mx-auto scrollbar-hide">
         {images.map((img, index) => (
           <div key={index} className="min-w-[280px] h-[200px] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
-            <img src={`https://optimixclub-backend.onrender.com/uploads/${img.picture}`} alt={`Event ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
+            <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${img.picture}`} alt={`Event ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
           </div>
         ))}
       </div>

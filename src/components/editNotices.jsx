@@ -18,7 +18,7 @@ const EditNotice = () => {
     // Fetch notice data
     const fetchNotice = async () => {
       try {
-        const response = await axios.get(`https://optimixclub-backend.onrender.com/api/notices/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/notices/${id}`);
         const notice = response.data;
 
         // ✅ Prefill the form with the event data
@@ -50,7 +50,7 @@ const EditNotice = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `https://optimixclub-backend.onrender.com/api/notices/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/notices/${id}`,
         noticeData,
         {
           headers: {

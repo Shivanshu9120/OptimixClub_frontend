@@ -29,7 +29,7 @@ const PictureForm = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/picture/submit", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/picture/submit`, {
         method: "POST",
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),

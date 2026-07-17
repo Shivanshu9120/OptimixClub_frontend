@@ -29,7 +29,7 @@ const EventForm = () => {
     
       try {
         const token = localStorage.getItem("token"); // Retrieve token (if needed)
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/events", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events`, {
           method: "POST",
           headers: {
             ...(token ? { Authorization: `Bearer ${token}` } : {}),

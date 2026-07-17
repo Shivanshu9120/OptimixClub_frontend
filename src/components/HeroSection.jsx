@@ -16,7 +16,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("https://optimixclub-backend.onrender.com/api/picture/");
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/picture/`);
         const data = await response.json();
         setImages(data.slice(0, 4)); // Limit to first 4 images
       } catch (error) {
@@ -45,7 +45,7 @@ const HeroSection = () => {
     <div className="w-full h-[600px] md:h-[575px] sm:h-[400px] relative overflow-hidden">
       {/* Background Image */}
       <img
-        src={`https://optimixclub-backend.onrender.com/uploads/${images[currentImageIndex]?.picture}`}
+        src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${images[currentImageIndex]?.picture}`}
         alt="Event"
         className="w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
       />

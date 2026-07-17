@@ -8,7 +8,7 @@ const EventBoard = () => {
   const eventRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://optimixclub-backend.onrender.com/api/events')
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/events`)
       .then(response => setEvents(response.data))
       .catch(error => console.error('Error fetching events:', error));
   }, []);
@@ -29,7 +29,7 @@ const EventBoard = () => {
           {events.map((event, index) => (
             <div key={index} className="bg-white border rounded-lg shadow-md p-4 min-w-[280px] w-72 h-[400px] flex flex-col hover:shadow-xl transition-all duration-300">
               <img
-                src={`https://optimixclub-backend.onrender.com/uploads/${event.picture}`}
+                src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${event.picture}`}
                 alt={event.name}
                 className="w-full h-40 object-cover rounded-md"
               />
