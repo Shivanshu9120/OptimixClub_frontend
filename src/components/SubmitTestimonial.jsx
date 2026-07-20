@@ -28,13 +28,10 @@ const SubmitTestimonial = () => {
     };
 
     return (
-        <div className="w-full flex flex-col items-center py-8 px-4">
-            {/* 🏷 Title Heading */}
-            <h1 className="text-3xl font-bold text-blue-600 mb-6">Submit Testimonials</h1>
-
+        <div className="w-full flex flex-col items-center py-4">
             {/* 🌟 Testimonial Form Card */}
-            <div className="w-full max-w-6xl bg-white border border-gray-300 shadow-md rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-gray-700 mb-4">Share Your Experience</h2>
+            <div className="w-full max-w-4xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm rounded-2xl p-6 transition-colors duration-300">
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4">Share Your Experience</h2>
 
                 {/* ✍️ Form */}
                 <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
@@ -44,18 +41,18 @@ const SubmitTestimonial = () => {
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Your Name"
                         required
-                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 px-4 py-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
                     />
                     <textarea
                         value={testimonial}
                         onChange={(e) => setTestimonial(e.target.value)}
                         placeholder="Write your testimonial..."
                         required
-                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-20"
+                        className="flex-1 px-4 py-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 transition-colors duration-200"
                     />
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition font-medium"
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition font-semibold text-sm self-end md:self-stretch"
                     >
                         Submit
                     </button>

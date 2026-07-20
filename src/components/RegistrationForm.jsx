@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Navbar from "./Navbar";
 
 const RegistrationForm = () => {
   const { eventId } = useParams();
@@ -81,54 +82,71 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200 px-4">
-      <div className="w-full max-w-md p-6 rounded-lg shadow-lg text-white bg-gradient-to-r from-blue-500 to-violet-600">
-        {event ? (
-          <>
-            <h2 className="text-2xl font-bold text-center">{event.name}</h2>
-            
-            <form onSubmit={handleSubmit} className="mt-4">
-              {/* Branch Selection */}
-              <label className="block text-sm font-medium text-gray-100">Branch</label>
-              <select
-                value={branch}
-                onChange={(e) => setBranch(e.target.value)}
-                className="mt-1 block w-full p-2 rounded bg-white text-black shadow-sm"
-                required
-              >
-                <option value="">Select Branch</option>
-                <option value="IT">Information Technology (IT)</option>
-                <option value="ME">Mechanical Engineering (ME)</option>
-                <option value="CE">Civil Engineering (CE)</option>
-              </select>
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <Navbar />
 
-              {/* Year Selection */}
-              <label className="block mt-3 text-sm font-medium text-gray-100">Year</label>
-              <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                className="mt-1 block w-full p-2 rounded bg-white text-black shadow-sm"
-                required
-              >
-                <option value="">Select Year</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-              </select>
+      <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
+        {/* Soft blur decorations */}
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full glow-blob-indigo blur-[120px] pointer-events-none z-0 opacity-40" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full glow-blob-amber blur-[120px] pointer-events-none z-0 opacity-30" />
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="mt-4 w-full px-6 py-2 bg-white text-blue-600 font-bold rounded-md shadow-md hover:bg-gray-200"
-              >
-                Submit Registration
-              </button>
-            </form>
-          </>
-        ) : (
-          <p className="text-center">Loading event details...</p>
-        )}
+        <div className="relative z-10 w-full max-w-md p-8 rounded-3xl shadow-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 transition-all duration-300">
+          {event ? (
+            <>
+              <div className="text-center mb-6">
+                <span className="inline-block bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-150 dark:border-indigo-950 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                  Event Registration
+                </span>
+                <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-tight">{event.name}</h2>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Branch Selection */}
+                <div>
+                  <label className="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-1.5">Branch</label>
+                  <select
+                    value={branch}
+                    onChange={(e) => setBranch(e.target.value)}
+                    className="block w-full p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition shadow-sm font-medium"
+                    required
+                  >
+                    <option value="">Select Branch</option>
+                    <option value="IT">Information Technology (IT)</option>
+                    <option value="ME">Mechanical Engineering (ME)</option>
+                    <option value="CE">Civil Engineering (CE)</option>
+                  </select>
+                </div>
+
+                {/* Year Selection */}
+                <div>
+                  <label className="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-1.5">Year</label>
+                  <select
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                    className="block w-full p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition shadow-sm font-medium"
+                    required
+                  >
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                  </select>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="mt-6 w-full py-3.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white font-bold rounded-xl shadow-md hover:shadow-indigo-500/25 transition-all transform hover:scale-[1.02]"
+                >
+                  Submit Registration
+                </button>
+              </form>
+            </>
+          ) : (
+            <p className="text-center text-slate-500 dark:text-slate-400 font-bold animate-pulse py-8">Loading event details...</p>
+          )}
+        </div>
       </div>
     </div>
   );

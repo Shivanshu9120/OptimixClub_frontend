@@ -69,47 +69,45 @@ const EventForm = () => {
     
   return (
     <div>
-          <h2 className="text-xl font-semibold mb-4">Create Event📅</h2>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            type="text"
-            name="name"
-            placeholder="Event Name"
-            className="w-full p-2 border rounded"
-            value={newEvent.name}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="date"
-            name="date"
-            className="w-full p-2 border rounded"
-            value={newEvent.date}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Event Description"
-            className="w-full p-2 border rounded"
-            value={newEvent.description}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="file"
-            name="picture"
-            className="w-full p-2 border rounded"
-            onChange={(e) => setNewEvent({ ...newEvent, picture: e.target.files[0] })}
-            // required
-          />
-          <button type="submit" className="w-full py-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:from-indigo-500 hover:via-purple-600 hover:to-pink-500">
-            Add Event
-          </button>
-        </form>
-          
+      <h2 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-100">Create Event 📅</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          name="name"
+          placeholder="Event Name"
+          className="w-full p-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors"
+          value={newEvent.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="date"
+          name="date"
+          className="w-full p-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors"
+          value={newEvent.date}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Event Description"
+          className="w-full p-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors h-24"
+          value={newEvent.description}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="file"
+          name="picture"
+          className="w-full p-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded focus:outline-none file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-550 file:text-white"
+          onChange={(e) => setNewEvent({ ...newEvent, picture: e.target.files[0] })}
+        />
+        <button type="submit" className="w-full py-2 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white font-bold text-sm rounded transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md">
+          Add Event
+        </button>
+      </form>
     </div>
-  )
+  );
 }
 
 export default EventForm
