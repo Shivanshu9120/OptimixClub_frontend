@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://optimix-club-frontend.vercel.app/</loc>
+    <priority>1.00</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <!-- Login Page -->
+  <url>
+    <loc>https://optimix-club-frontend.vercel.app/login</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <!-- Contact Page -->
+  <url>
+    <loc>https://optimix-club-frontend.vercel.app/contact</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <!-- About Page -->
+  <url>
+    <loc>https://optimix-club-frontend.vercel.app/about</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+</urlset>
