@@ -7,13 +7,13 @@ const AdminRegistration = () => {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get("https://optimixclub-backend.onrender.com/api/registration/registrations", {
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/registration/registrations`, {
             headers: { Authorization: `Bearer ${token}` }
         }).then(res => setRegistrations(res.data));
     }, [token]);
 
     const handleStatusUpdate = async (id, status) => {
-        await axios.put(`https://optimixclub-backend.onrender.com/api/registration/approve/${id}`, 
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/registration/approve/${id}`, 
             { status }, 
             { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -21,7 +21,7 @@ const AdminRegistration = () => {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`https://optimixclub-backend.onrender.com/api/registration/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/registration/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         Swal.fire(
@@ -32,62 +32,71 @@ const AdminRegistration = () => {
         setRegistrations(prev => prev.filter(reg => reg._id !== id));
     };
 
-    return (
-        <div className="w-full h-screen overflow-y-auto bg-gray-100">
-            <h2 className="text-2xl font-bold text-center py-4 bg-white shadow">Pending Registrations</h2>
-            <div className="flex flex-col gap-2 p-2">
-                {registrations.map(reg => (
-                    <div 
-                        key={reg._id} 
-                        className="w-full bg-white shadow-md p-4 border rounded-lg 
-                                   flex flex-col sm:flex-row sm:items-center sm:justify-between"
-                    >
-                        {/* User Image & Info */}
-                        <div className="flex items-center gap-4">
-                            <img 
-                                src={`https://optimixclub-backend.onrender.com/uploads/${reg.user.photo}`} 
-                                alt="User" 
-                                className="w-12 h-12 rounded-full border"
-                            />
-                            <div>
-                                <p className="text-lg font-semibold">{reg.user.name} - {reg.event.name}</p>
-                                <p className="text-gray-700">{reg.branch} - {reg.year} ({reg.status})</p>
-                            </div>
-                        </div>
+  return (
+    <div className="w-full">
+      <div className="flex flex-col gap-4">
+        {registrations.length === 0 ? (
+          <p className="text-center text-slate-500 dark:text-slate-400 py-8">No registrations found.</p>
+        ) : (
+          registrations.map(reg => (
+            <div 
+              key={reg._id} 
+              className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between transition-all duration-200 hover:shadow-md"
+            >
+              {/* User Image & Info */}
+              <div className="flex items-center gap-4">
+                <img 
+                  src={reg.user?.photo && reg.user?.photo !== "null" && reg.user?.photo !== "undefined" ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${reg.user.photo}` : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='100%' height='100%' fill='%23f1f5f9'/><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z' fill='%2394a3b8'/></svg>"} 
+                  alt="User" 
+                  className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 object-cover"
+                />
+                <div>
+                  <p className="text-base font-bold text-slate-800 dark:text-slate-100">
+                    {reg.user.name} <span className="text-slate-400 dark:text-slate-500 font-normal">registered for</span> {reg.event.name}
+                  </p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                    {reg.branch} Branch • Year {reg.year} • <span className={`font-semibold capitalize ${
+                      reg.status === "approved"
+                        ? "text-emerald-600 dark:text-emerald-400"
+                        : reg.status === "rejected"
+                        ? "text-rose-600 dark:text-rose-400"
+                        : "text-amber-600 dark:text-amber-400"
+                    }`}>{reg.status}</span>
+                  </p>
+                </div>
+              </div>
 
-                        {/* Action Buttons (Responsive) */}
-                        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 sm:gap-4">
-                            {(reg.status === "pending" || reg.status === "rejected") && (
-                                <>
-                                    <button 
-                                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                                        onClick={() => handleStatusUpdate(reg._id, "approved")}
-                                    >
-                                        Approve
-                                    </button>
-                                </>
-                            )}
-                            {reg.status === "approved"  && 
-
-                                    <button 
-                                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                                        onClick={() => handleStatusUpdate(reg._id, "rejected")}
-                                    >
-                                        Reject
-                                    </button>
-                            }
-                                    <button 
-                                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                        onClick={() => handleDelete(reg._id)}
-                                    >
-                                        Delete
-                                    </button>
-                        </div>
-                    </div>
-                ))}
+              {/* Action Buttons (Responsive) */}
+              <div className="flex flex-row items-center gap-2 mt-4 sm:mt-0">
+                {(reg.status === "pending" || reg.status === "rejected") && (
+                  <button 
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-colors"
+                    onClick={() => handleStatusUpdate(reg._id, "approved")}
+                  >
+                    Approve
+                  </button>
+                )}
+                {reg.status === "approved" && (
+                  <button 
+                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-colors"
+                    onClick={() => handleStatusUpdate(reg._id, "rejected")}
+                  >
+                    Reject
+                  </button>
+                )}
+                <button 
+                  className="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-colors"
+                  onClick={() => handleDelete(reg._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-        </div>
-    );
+          ))
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default AdminRegistration;

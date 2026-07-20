@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
-const PictureForm = () => {
+const PictureForm = ({ onSuccess }) => {
   const [pictures, setPictures] = useState([]);
   const [newPicture, setNewPicture] = useState({
     name: "",
@@ -29,7 +29,7 @@ const PictureForm = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://optimixclub-backend.onrender.com/api/picture/submit", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/picture/submit`, {
         method: "POST",
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -48,6 +48,9 @@ const PictureForm = () => {
       setNewPicture({ name: "", description: "", picture: "" });
 
       Swal.fire("Picture posted!", "Your picture has been posted.", "success");
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error("Error creating picture", error);
       Swal.fire("Error!", "Error posting picture. Please try again", "error");
@@ -55,47 +58,58 @@ const PictureForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center">
+    <div className="w-full flex items-center justify-center p-4">
+      <div className="w-full max-w-lg p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 shadow-lg rounded-2xl transition-colors duration-300">
+        <h2 className="text-xl font-bold text-center text-slate-800 dark:text-slate-100 mb-5">
+          Post to Gallery 📸
+        </h2>
 
-    <div className="max-w-lg   p-6 bg-white shadow-lg rounded-lg ">
-      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-5">
-        Create Picture 📅
-      </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-1">Event Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="e.g. Annual Hackathon"
+              className="w-full p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+              value={newPicture.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Event Name"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={newPicture.name}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Event Description"
-          className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={newPicture.description}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="file"
-          name="picture"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none file:bg-blue-500 file:text-white file:py-2 file:px-4 file:rounded-md file:cursor-pointer"
-          onChange={handleChange}
-          required
-        />
+          <div>
+            <label className="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-1">Description</label>
+            <textarea
+              name="description"
+              placeholder="Tell us about the memory..."
+              className="w-full p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+              value={newPicture.description}
+              onChange={handleChange}
+              rows="3"
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:from-indigo-500 hover:via-purple-600 hover:to-pink-500"
-        >
-          Add Picture
-        </button>
-      </form>
-    </div>
+          <div>
+            <label className="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-1">Upload Picture</label>
+            <input
+              type="file"
+              name="picture"
+              className="w-full p-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 dark:file:bg-indigo-950/40 file:text-indigo-700 dark:file:text-indigo-400 hover:file:bg-indigo-100 dark:hover:file:bg-indigo-950/60 transition-colors duration-200"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 text-sm font-bold bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
+          >
+            Upload Picture
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
